@@ -118,13 +118,3 @@ char	**ft_split(char const *s, char c)
 		return (NULL);
 	return (corelogic(s, c, words, &strs));
 }
-/*
-int     main()
-{
-        char **s3=ft_split("hello,world,hi!",',');
-        printf("%s",s3[0]);
-        printf("%s",s3[1]);
-        printf("%s",s3[2]);
-        printf("%s",s3[3]);
-        free(s3);
-}*/
