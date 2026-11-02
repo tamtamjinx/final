@@ -3,29 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tlafi <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: rualmasr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/10/26 19:25:22 by tlafi             #+#    #+#             */
-/*   Updated: 2026/10/26 19:25:25 by tlafi            ###   ########.fr       */
+/*   Created: 2026/10/11 12:48:42 by rualmasr          #+#    #+#             */
+/*   Updated: 2026/10/11 12:48:44 by rualmasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <unistd.h>
 
 void	ft_putnbr_fd(int n, int fd)
 {
 	long	num;
-	char	digit;
+	char	c;
 
 	num = n;
 	if (num < 0)
 	{
-		(void)write(fd, "-", 1);
-		num = -num;
+		write(fd, "-", 1);
+		num *= -1;
 	}
 	if (num >= 10)
-		ft_putnbr_fd((int)(num / 10), fd);
-	digit = (char)(num % 10 + '0');
-	(void)write(fd, &digit, 1);
+		ft_putnbr_fd(num / 10, fd);
+	c = (num % 10) + '0';
+	write(fd, &c, 1);
 }
+/*
+int     main()
+{
+         ft_putnbr_fd(-1112, 1);
+}*/

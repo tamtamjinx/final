@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tlafi <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: rualmasr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/10/26 19:23:18 by tlafi             #+#    #+#             */
-/*   Updated: 2026/10/26 19:23:19 by tlafi            ###   ########.fr       */
+/*   Created: 2026/10/11 11:48:25 by rualmasr          #+#    #+#             */
+/*   Updated: 2026/10/11 12:03:11 by rualmasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,72 @@
 
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	t_list	*head;
-	t_list	*node;
-	void	*content;
+	t_list	*newlst;
+	t_list	*newnode;
+	void	*newcontent;
 
-	if (!f || !del)
+	if (!lst || !f || !del)
 		return (NULL);
-	head = NULL;
+	newlst = NULL;
 	while (lst)
 	{
-		content = f(lst->content);
-		node = ft_lstnew(content);
-		if (!node)
+		newcontent = f(lst -> content);
+		newnode = ft_lstnew(newcontent);
+		if (!newnode)
 		{
-			del(content);
-			ft_lstclear(&head, del);
+			del (newcontent);
+			ft_lstclear(&newlst, del);
 			return (NULL);
 		}
-		ft_lstadd_back(&head, node);
-		lst = lst->next;
+		ft_lstadd_back(&newlst, newnode);
+		lst = lst -> next;
 	}
-	return (head);
+	return (newlst);
 }
+/*
+void del(void *content)
+{
+	free(content);
+}
+void *to_upper(void *content)
+{
+	char	*str;
+	int	i;
+	char	*dup;
+	i = 0;
+	if (!content)
+		return(NULL);
+	str = (char *) content;
+	dup = ft_strdup(str);
+	if (!dup)
+		return(NULL);
+	while(dup[i])
+	{
+		if (dup[i] >= 'a' && dup[i] <= 'z')
+			dup[i] -= 32;
+		i++;
+	}
+	return (void*)dup;
+}
+
+int main()
+{
+	t_list *node1 = NULL;
+	t_list *after = NULL;
+	t_list *before = NULL;
+
+	ft_lstadd_back(&node1,ft_lstnew(ft_strdup("hello")));
+	ft_lstadd_back(&node1,ft_lstnew(ft_strdup("world")));
+	ft_lstadd_back(&node1,ft_lstnew(ft_strdup("!!")));
+
+	before = ft_lstmap(node1, to_upper,del);
+	after = before;
+	while (after)
+	{
+		printf("%s\n",(char *)after->content);
+                after = after -> next ;
+	}
+	ft_lstclear(&node1,del);
+	ft_lstclear(&after,del);
+
+}*/

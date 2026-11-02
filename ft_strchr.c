@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tlafi <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: rualmasr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/10/26 19:25:54 by tlafi             #+#    #+#             */
-/*   Updated: 2026/10/26 19:25:55 by tlafi            ###   ########.fr       */
+/*   Created: 2026/09/30 14:32:46 by rualmasr          #+#    #+#             */
+/*   Updated: 2026/10/11 10:22:41 by rualmasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,26 @@
 
 char	*ft_strchr(const char *s, int c)
 {
-	while (*s)
+	size_t	i;
+
+	i = 0;
+	while (s[i] != '\0')
 	{
-		if (*s == (char)c)
-			return ((char *)s);
-		s++;
+		if (s[i] == (char)c)
+			return ((char *)&s[i]);
+		i++;
 	}
-	if ((char)c == '\0')
-		return ((char *)s);
+	if (s[i] == (char )c)
+		return ((char *)&s[i]);
 	return (NULL);
 }
+/*
+
+int main()
+{
+    char *s = "hello world!";
+    printf("%s\n",ft_strchr(s,'w'));
+     printf("%s\n",ft_strchr(s,'\0'));
+       printf("%s\n",ft_strchr(s,'h'));
+       printf("%p\n",ft_strchr(s,'H'));
+}*/

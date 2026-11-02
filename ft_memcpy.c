@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tlafi <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: rualmasr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/10/26 19:24:23 by tlafi             #+#    #+#             */
-/*   Updated: 2026/10/26 19:24:27 by tlafi            ###   ########.fr       */
+/*   Created: 2026/09/30 10:18:05 by rualmasr          #+#    #+#             */
+/*   Updated: 2026/09/30 10:21:47 by rualmasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 
 	if (!dest && !src)
 		return (NULL);
-	d = (unsigned char *)dest;
-	s = (const unsigned char *)src;
+	s = (const unsigned char *) src;
+	d = (unsigned char *) dest;
 	i = 0;
 	while (i < n)
 	{
@@ -30,3 +30,18 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 	}
 	return (dest);
 }
+/*
+int main()
+{
+    char s[]="hello";
+    char d[6] = {0};
+    ft_memcpy(d,s,5);
+    printf("s is = %s\n",s);
+        printf("d is = %s\n",d);
+
+	char s1[]="world";
+    char d1[10] = {0};
+    ft_memcpy(d1,s1,2);
+    printf("s is = %s\n",s1);
+        printf("d is = %s",d1);
+}*/

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tlafi <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: rualmasr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/10/26 19:28:26 by tlafi             #+#    #+#             */
-/*   Updated: 2026/10/26 19:28:27 by tlafi            ###   ########.fr       */
+/*   Created: 2026/10/11 12:19:42 by rualmasr          #+#    #+#             */
+/*   Updated: 2026/10/11 12:19:44 by rualmasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,28 @@
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	size_t	slen;
-	size_t	copy_len;
 	char	*sub;
+	size_t	ssize;
 
 	if (!s)
 		return (NULL);
-	slen = ft_strlen(s);
-	if ((size_t)start >= slen)
-		return (ft_strdup(""));
-	copy_len = slen - start;
-	if (copy_len > len)
-		copy_len = len;
-	sub = malloc(copy_len + 1);
+	ssize = ft_strlen(s);
+	if (start >= ssize)
+		len = 0;
+	else if (len > ssize - start)
+		len = ssize - start;
+	sub = (char *)malloc (len + 1);
 	if (!sub)
 		return (NULL);
-	ft_memcpy(sub, s + start, copy_len);
-	sub[copy_len] = '\0';
+	ft_memcpy(sub, s + start, len);
+	sub[len] = '\0';
 	return (sub);
 }
+/*
+int	main()
+{
+	char *s1 = "hello world";
+	char *s2 =ft_substr(s1,1,10);
+	printf("%s",s2);
+	free(s2);
+}*/

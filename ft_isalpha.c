@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tlafi <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: rualmasr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/10/26 18:57:33 by tlafi             #+#    #+#             */
-/*   Updated: 2026/10/26 18:57:35 by tlafi            ###   ########.fr       */
+/*   Created: 2026/09/30 11:09:54 by rualmasr          #+#    #+#             */
+/*   Updated: 2026/09/30 11:11:04 by rualmasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,21 @@
 
 int	ft_isalpha(int c)
 {
-	return ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'));
+	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
+	{
+		return (1);
+	}
+	return (0);
 }
+/*
+
+int main()
+{
+    printf("%d\n",ft_isalpha('A'));
+    printf("%d\n",ft_isalpha('e'));
+    printf("%d\n",ft_isalpha('5'));
+    printf("%d\n",ft_isalpha(65));
+    printf("%d\n",ft_isalpha('#'));
+    printf("%d\n",ft_isalpha(3));
+    printf("%d\n",ft_isalpha('\0'));
+}*/

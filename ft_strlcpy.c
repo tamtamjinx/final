@@ -3,29 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tlafi <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: rualmasr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/10/26 19:26:52 by tlafi             #+#    #+#             */
-/*   Updated: 2026/10/26 19:26:54 by tlafi            ###   ########.fr       */
+/*   Created: 2026/09/30 11:23:25 by rualmasr          #+#    #+#             */
+/*   Updated: 2026/09/30 15:56:27 by rualmasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t size)
+size_t	ft_strlcpy(char *dst, const char *src, size_t dsize)
 {
+	size_t	ssize;
 	size_t	i;
-	size_t	src_len;
 
-	src_len = ft_strlen(src);
-	if (size == 0)
-		return (src_len);
 	i = 0;
-	while (src[i] && i + 1 < size)
+	ssize = ft_strlen(src);
+	if (dsize == 0)
+		return (ssize);
+	while (src[i] != '\0' && i < (dsize -1))
 	{
 		dst[i] = src[i];
 		i++;
 	}
 	dst[i] = '\0';
-	return (src_len);
+	return (ssize);
 }
+/*
+int main()
+{
+    char *s = "hello world!";
+    char *d;
+    printf("%zu \n",ft_strlcpy(d,s,6));
+    printf("%s\n",d);
+    printf("%zu",ft_strlen(d)+1);
+
+}*/

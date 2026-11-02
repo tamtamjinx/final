@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tlafi <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: rualmasr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/10/26 19:26:32 by tlafi             #+#    #+#             */
-/*   Updated: 2026/10/26 19:26:35 by tlafi            ###   ########.fr       */
+/*   Created: 2026/10/11 12:20:05 by rualmasr          #+#    #+#             */
+/*   Updated: 2026/10/11 12:20:15 by rualmasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,27 @@
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	size_t	len1;
-	size_t	len2;
-	char	*joined;
+	char	*sjoin;
+	size_t	s1size;
+	size_t	s2size;
 
 	if (!s1 || !s2)
 		return (NULL);
-	len1 = ft_strlen(s1);
-	len2 = ft_strlen(s2);
-	joined = malloc(len1 + len2 + 1);
-	if (!joined)
+	s1size = ft_strlen(s1);
+	s2size = ft_strlen(s2);
+	sjoin = (char *) malloc(s1size + s2size + 1);
+	if (!sjoin)
 		return (NULL);
-	ft_memcpy(joined, s1, len1);
-	ft_memcpy(joined + len1, s2, len2 + 1);
-	return (joined);
+	ft_memcpy(sjoin, s1, s1size);
+	ft_memcpy(sjoin + s1size, s2, s2size + 1);
+	return (sjoin);
 }
+/*
+int	main()
+{
+	char *s1="hello";
+	char *s2="world";
+	char *s3=ft_strjoin(s1,s2);
+	printf("%s",s3);
+	free(s3);
+}*/

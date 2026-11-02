@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tlafi <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: rualmasr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/10/26 18:37:22 by tlafi             #+#    #+#             */
-/*   Updated: 2026/10/26 18:37:26 by tlafi            ###   ########.fr       */
+/*   Created: 2026/09/30 12:38:00 by rualmasr          #+#    #+#             */
+/*   Updated: 2026/09/30 12:41:22 by rualmasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,31 @@
 
 int	ft_atoi(const char *nptr)
 {
-	int		i;
-	int		sign;
-	long	result;
+	int	sign;
+	int	result;
+	int	i;
 
-	i = 0;
 	sign = 1;
 	result = 0;
-	while (nptr[i] == ' ' || (nptr[i] >= '\t' && nptr[i] <= '\r'))
+	i = 0;
+	while ((nptr[i] >= 9 && nptr[i] <= 13) || nptr[i] == ' ')
 		i++;
-	if (nptr[i] == '-')
+	if (nptr[i] == '+' || nptr[i] == '-')
 	{
-		sign = -1;
+		if (nptr[i] == '-')
+			sign = -1;
 		i++;
 	}
-	else if (nptr[i] == '+')
-		i++;
 	while (nptr[i] >= '0' && nptr[i] <= '9')
 	{
-		result = result * 10 + (nptr[i] - '0');
+		result = (result * 10) + (nptr[i] - '0');
 		i++;
 	}
-	return ((int)(result * sign));
+	return (sign * result);
 }
+/*
+int main()
+{
+    char *s="-1234rert";
+    printf("%d",ft_atoi(s));
+}*/

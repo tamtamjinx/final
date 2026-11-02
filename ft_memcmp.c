@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tlafi <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: rualmasr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/10/26 19:24:12 by tlafi             #+#    #+#             */
-/*   Updated: 2026/10/26 19:24:13 by tlafi            ###   ########.fr       */
+/*   Created: 2026/09/30 10:59:40 by rualmasr          #+#    #+#             */
+/*   Updated: 2026/09/30 11:05:08 by rualmasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,29 @@
 
 int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	const unsigned char	*a;
-	const unsigned char	*b;
+	const unsigned char	*c1;
+	const unsigned char	*c2;
+	size_t				i;
 
-	a = (const unsigned char *)s1;
-	b = (const unsigned char *)s2;
-	while (n--)
+	c1 = (const unsigned char *) s1;
+	c2 = (const unsigned char *) s2;
+	i = 0;
+	while (i < n)
 	{
-		if (*a != *b)
-			return (*a - *b);
-		a++;
-		b++;
+		if (c1[i] != c2[i])
+			return (c1[i] - c2[i]);
+		i++;
 	}
 	return (0);
 }
+/*
+int main ()
+{
+    char s1[]="helloewew";
+    char s2[]= "helloaa";
+    char s3[]= "zzzz";
+
+    printf("%d\n",ft_memcmp(s1,s2,5));
+     printf("%d\n",ft_memcmp(s1,s2,9));
+     printf("%d\n",ft_memcmp(s1,s3,5));
+}*/

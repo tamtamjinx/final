@@ -3,33 +3,48 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tlafi <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: rualmasr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/10/26 19:26:44 by tlafi             #+#    #+#             */
-/*   Updated: 2026/10/26 19:26:46 by tlafi            ###   ########.fr       */
+/*   Created: 2026/09/30 12:20:12 by rualmasr          #+#    #+#             */
+/*   Updated: 2026/10/26 12:32:37 by rualmasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlcat(char *dst, const char *src, size_t size)
+size_t	ft_strlcat(char *dst, const char *src, size_t dsize)
 {
-	size_t	dst_len;
-	size_t	src_len;
+	size_t	ssize;
+	size_t	ddsize;
 	size_t	i;
 
-	src_len = ft_strlen(src);
-	dst_len = 0;
-	while (dst_len < size && dst[dst_len])
-		dst_len++;
-	if (dst_len == size)
-		return (size + src_len);
+	ssize = ft_strlen(src);
 	i = 0;
-	while (src[i] && dst_len + i + 1 < size)
+	ddsize = ft_strlen(dst);
+	if (dsize <= ddsize)
+		return (ssize + dsize);
+	while (src[i] != '\0' && (ddsize + i) < (dsize -1))
 	{
-		dst[dst_len + i] = src[i];
+		dst[ddsize + i] = src[i];
 		i++;
 	}
-	dst[dst_len + i] = '\0';
-	return (dst_len + src_len);
+	dst[ddsize + i] = '\0';
+	return (ssize + ddsize);
 }
+/*
+int main()
+{
+	char d[50] = "HI :";
+    char *s = "Hello World";;
+
+    printf("%zu\n",ft_strlcat(d,s,10));
+    printf("%s\n",d);
+    printf("%zu\n",ft_strlen(d) + 1);
+
+     char d1[50] = "HI :";
+    char *s1 = "Hello World";;
+
+    printf("%zu\n",ft_strlcat(d1,s1,2));
+    printf("%s\n",d1);
+    printf("%zu\n",ft_strlen(d1) + 1);
+}*/

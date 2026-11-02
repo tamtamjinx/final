@@ -1,54 +1,80 @@
-*This project has been created as part of the 42 curriculum by tlafi.*
-
-# Libft
+*This project has been created as part of the 42 curriculum by rualmasr*
 
 ## Description
 
-Libft is a custom C static library that reimplements common standard-library functions and adds utility functions for strings, memory, numeric conversions, output, and singly linked lists. The goal is to practice pointers, allocation, memory ownership, iteration, and basic data structures while producing a reusable library for future 42 projects.
+This project focuses on recreating standard C library functions from scratch to build a deeper understanding of how they work internally. It aims to improve knowledge of the C language, pointers, memory management, and error handling while developing reusable functions that will serve as a foundation for future projects within the 42 curriculum.
 
-## Library contents
+## Library Details ( libft.a)
 
-The library contains **43 functions**, grouped as follows:
 
-- **Character classification and conversion:** `ft_isalpha`, `ft_isdigit`, `ft_isalnum`, `ft_isascii`, `ft_isprint`, `ft_toupper`, `ft_tolower`.
-- **Memory:** `ft_memset`, `ft_bzero`, `ft_memcpy`, `ft_memmove`, `ft_memchr`, `ft_memcmp`, `ft_calloc`.
-- **String inspection and copying:** `ft_strlen`, `ft_strchr`, `ft_strrchr`, `ft_strncmp`, `ft_strnstr`, `ft_strlcpy`, `ft_strlcat`, `ft_strdup`.
-- **String construction and transformation:** `ft_substr`, `ft_strjoin`, `ft_strtrim`, `ft_split`, `ft_strmapi`, `ft_striteri`.
-- **Conversion:** `ft_atoi`, `ft_itoa`.
-- **File-descriptor output:** `ft_putchar_fd`, `ft_putstr_fd`, `ft_putendl_fd`, `ft_putnbr_fd`.
-- **Linked lists:** `ft_lstnew`, `ft_lstadd_front`, `ft_lstsize`, `ft_lstlast`, `ft_lstadd_back`, `ft_lstdelone`, `ft_lstclear`, `ft_lstiter`, `ft_lstmap`.
+The custom library contains reimplemented standard C functions divided into two main categories :
 
-The `t_list` structure (declared in `libft.h`) stores a `void *content` pointer and a `next` node pointer. List helpers manipulate nodes, traverse the list, delete allocated content using caller-supplied callbacks, and map contents into new nodes. String-producing functions return dynamically allocated memory where documented; callers are responsible for freeing it. Functions operating on buffers require valid memory of adequate size. `ft_memcpy` requires non-overlapping ranges; use `ft_memmove` for overlapping memory.
+1. ### Libc Functions
+   
+Functions that mimic standard library behavior ( using the ft_prefix):
+* Meomry Manipulation: `ft_memset`, `ft_bzero`, `ft_memcpy`, `ft_memmove`, `ft_memchr`, `ft_memcmp`
+* String Manipulation and Inspection : `ft_strlen`, `ft_strlcpy`, `ft_strlcat`, `ft_strchr`, `ft_strrchr`, `ft_strncmp`, `ft_strnstr`, `ft_strdup`, `ft_substr`, `ft_strjoin` , `ft_strtrim`, `ft_split`, `ft_strmapi`, `ft_striteri`
+* Character Checks and Conversions : `ft_isalpha`, `ft_isdigit`, `ft_isalnum`, `ft_isascii`, `ft_isprint`, `ft_toupper`, `ft_tolower`
+* Numeric Conversion and Allocation: `ft_atoi`, `ft_itoa`, `ft_calloc`
+* Output Function : `ft_putchar_fd`, `ft_putstr_fd`, `ft_putendl_fd`, `ft_putnbr_fd`
+
+2. ### Linked Lists
+   
+Functions designed to manipulate single linked lists ( t_list structure):
+
+* `ft_lstnew`, `ft_lstadd_front`, `ft_lstsize`, `ft_lstlast`, `ft_lstadd_back`, `ft_lstdelone`, `ft_lstclear`, `ft_lstiter`, `ft_lstmap`
 
 ## Instructions
 
-Requirements: a C compiler, `make`, and `ar` on a Unix-like environment.
+### Compilation
+The project comes with a robust Makefile that compiles the source files into the static library `libft.a`.
 
-```sh
-make          # Compile libft.a
-make clean    # Remove object files
-make fclean   # Remove object files and libft.a
-make re       # Rebuild from scratch
+* Compile the main library: 
+
+ ```bash
+ make
+  ```
+
+* Clean up object files:
+
+```bash
+make clean
 ```
 
-To use the library in another C project:
+* Clean up object files and the compiled library( libft.a)
 
-```sh
-cc -Wall -Wextra -Werror -I. your_program.c -L. -lft -o your_program
-./your_program
+
+```bash
+make fclean
 ```
 
-Include `#include "libft.h"` in the program. `libft.a` is the static archive produced by `make`. For illustrative sample `main()` functions, see `TEST_MAINS.md`; these examples are deliberately separate from the submitted `.c` files.
 
-## Resources
+* Re-compile everything from scratch :
 
-- [C language reference — cppreference](https://en.cppreference.com/w/c): C types, pointers, casts, and standard-library behavior.
-- [Linux manual pages — man7.org](https://man7.org/linux/man-pages/): `write(2)`, `malloc(3)`, and other Unix/C interfaces.
-- [GNU Make manual](https://www.gnu.org/software/make/manual/): build rules, variables, and targets.
-- [42 Norminette](https://github.com/42School/norminette): source-formatting requirements.
+```bash
+make re
+```
 
-**AI usage:** AI assistance was used to review code, identify and debug compilation issues, suggest corrections, and clarify C language concepts and edge cases. The project functions and their behavior should be understood and independently verified before submission.
+### Usage
+  To use the library in your own C projects:
+1. Include the header in your source files:
 
-## Validation
+```C
+#include "libft.h"
+```
 
-The project is compiled with `-Wall -Wextra -Werror`. A successful compilation verifies that the sources and header declarations are consistent; it does not guarantee complete behavioral correctness or Norminette compliance. Run the official Norminette tool and your own edge-case tests in the 42 environment before submitting.
+2. Compile your program by linking the library:
+
+```bash
+gcc -Wall -Wextra -Werror your_program.c libft.a
+```
+
+   
+## Resources and References
+
+* [Makefile tutorial](https://makefiletutorial.com/)
+* [Memory allocation](https://www.youtube.com/watch?v=R0qIYWo8igs)
+* [header file](https://www.geeksforgeeks.org/c/header-files-in-c-cpp-and-its-uses/)
+* [linked list](https://www.geeksforgeeks.org/c/linked-list-in-c/),[single linked list](https://www.youtube.com/watch?v=DneLxrPmmsw)
+
+##### I used AI tools strictly to clarify basic theoretical concepts after initial research. All code and documentation were written entirely by hand.

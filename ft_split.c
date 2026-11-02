@@ -3,118 +3,93 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tlafi <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: rualmasr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/10/26 19:25:44 by tlafi             #+#    #+#             */
-/*   Updated: 2026/10/26 19:25:45 by tlafi            ###   ########.fr       */
+/*   Created: 2026/10/11 12:22:05 by rualmasr          #+#    #+#             */
+/*   Updated: 2026/10/21 12:21:49 by rualmasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	count_words(char const *s, char c)
+static size_t	ft_count_words(const char *s, char c)
 {
-	int	inword;
-	int	i;
-	int	count;
+	size_t	i;
+	size_t	count;
 
-	count = 0;
 	i = 0;
-	inword = 0;
-	while (s[i])
+	count = 0;
+	while (s[i] != '\0')
 	{
-		if (s[i] != c && inword == 0)
-		{
-			inword = 1;
+		if (s[i] != c && (s[i + 1] == c || s[i + 1] == '\0'))
 			count++;
-		}
-		if (s[i] == c && inword == 1)
-			inword = 0;
 		i++;
 	}
 	return (count);
 }
 
-static char	*ft_strdup_uptoc(char const *s, int *i, char c)
+static	char	**ft_free(char **ssplit, size_t j)
 {
-	int		j;
-	char	*newstr;
-
-	j = *i;
-	while (s[j] && s[j] != c)
-		j++;
-	newstr = malloc(sizeof(char) * (j - *i + 1));
-	if (!newstr)
-		return (NULL);
-	j = 0;
-	while (s[*i] && s[*i] != c)
-	{
-		newstr[j] = s[*i];
-		(*i)++;
-		j++;
-	}
-	newstr[j] = '\0';
-	return (newstr);
+	while (j > 0)
+		free(ssplit[--j]);
+	free(ssplit);
+	return (NULL);
 }
 
-static void	ft_clear(char	***strs, int ptrsc)
+static size_t	ft_word_length(const char *s, char c, size_t i)
 {
-	int	i;
+	size_t	len;
 
-	i = 0;
-	while (i < ptrsc)
-	{
-		free((*strs)[i]);
-		i++;
-	}
-	free(*strs);
+	len = 0;
+	while (s[i + len] != '\0' && s[i + len] != c)
+		len++;
+	return (len);
 }
 
-static char	**corelogic(char const *s, char c, int words, char ***strs)
+static	char	**ft_fill(char **ssplit, const char *s, char c)
 {
-	int	i;
-	int	j;
+	size_t	i;
+	size_t	j;
+	size_t	length;
 
 	i = 0;
 	j = 0;
-	while (s[i])
+	while (s[i] != '\0')
 	{
-		if (s[i] == c)
-			i++;
-		else
+		if (s[i] != c)
 		{
-			(*strs)[j] = ft_strdup_uptoc(s, &i, c);
-			if (!(*strs)[j])
-			{
-				ft_clear(strs, j);
-				return (NULL);
-			}
+			length = ft_word_length(s, c, i);
+			ssplit[j] = ft_substr(s, i, length);
+			if (!ssplit[j])
+				return (ft_free(ssplit, j));
 			j++;
+			i += length;
 		}
+		else
+			i++;
 	}
-	(*strs)[words] = NULL;
-	return (*strs);
+	ssplit[j] = 0;
+	return (ssplit);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	char	**strs;
-	int		words;
+	char	**ssplit;
 
 	if (!s)
 		return (NULL);
-	words = count_words(s, c);
-	if (words > 0)
-		strs = malloc(sizeof(char *) * (words + 1));
-	else
-	{
-		strs = malloc(sizeof(char *) * 1);
-		if (!strs)
-			return (NULL);
-		strs[0] = NULL;
-		return (strs);
-	}
-	if (!strs)
+	ssplit = (char **)malloc((ft_count_words(s, c) + 1) * sizeof(char *));
+	if (!ssplit)
 		return (NULL);
-	return (corelogic(s, c, words, &strs));
+	return (ft_fill(ssplit, s, c));
 }
+/*
+int     main()
+{
+        char **s3=ft_split("hello,world,hi!",',');
+        printf("%s",s3[0]);
+        printf("%s",s3[1]);
+        printf("%s",s3[2]);
+        printf("%s",s3[3]);
+        free(s3);
+}*/

@@ -3,47 +3,42 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tlafi <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: rualmasr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/10/26 19:28:15 by tlafi             #+#    #+#             */
-/*   Updated: 2026/10/26 19:28:16 by tlafi            ###   ########.fr       */
+/*   Created: 2026/10/11 12:20:37 by rualmasr          #+#    #+#             */
+/*   Updated: 2026/10/11 12:20:39 by rualmasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	is_in_set(char c, char const *set)
-{
-	size_t	i;
-
-	i = 0;
-	while (set[i])
-	{
-		if (set[i] == c)
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
 char	*ft_strtrim(char const *s1, char const *set)
 {
-	size_t	start;
-	size_t	end;
-	char	*trimmed;
+	char		*strim;
+	size_t		start;
+	size_t		end;
 
 	if (!s1 || !set)
 		return (NULL);
 	start = 0;
-	while (s1[start] && is_in_set(s1[start], set))
-		start++;
 	end = ft_strlen(s1);
-	while (end > start && is_in_set(s1[end - 1], set))
+	while (s1[start] != '\0' && ft_strchr(set, s1[start]))
+		start++;
+	while (end > start && ft_strchr(set, s1[end - 1]))
 		end--;
-	trimmed = malloc(end - start + 1);
-	if (!trimmed)
+	strim = (char *) malloc(end - start + 1);
+	if (!strim)
 		return (NULL);
-	ft_memcpy(trimmed, s1 + start, end - start);
-	trimmed[end - start] = '\0';
-	return (trimmed);
+	ft_memcpy(strim, s1 + start, end - start);
+	strim[end - start] = '\0';
+	return (strim);
 }
+/*
+int main()
+{
+	char	*s = "./hello/.";
+	char	*set = "./";
+	char	*s1= ft_strtrim(s,set);
+	printf("%s",s1);
+	free(s1);
+}*/

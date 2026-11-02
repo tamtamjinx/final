@@ -3,53 +3,62 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tlafi <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: rualmasr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/10/26 19:21:55 by tlafi             #+#    #+#             */
-/*   Updated: 2026/10/26 19:21:56 by tlafi            ###   ########.fr       */
+/*   Created: 2026/10/11 12:23:08 by rualmasr          #+#    #+#             */
+/*   Updated: 2026/10/11 12:27:12 by rualmasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	num_len(long n)
+static size_t	ft_count(int n)
 {
-	int	len;
+	size_t	count;
 
-	len = 1;
-	if (n < 0)
+	count = 0;
+	if (n <= 0)
+		count++;
+	while (n != 0)
 	{
-		len++;
-		n = -n;
+		n = n / 10;
+		count++;
 	}
-	while (n >= 10)
-	{
-		n /= 10;
-		len++;
-	}
-	return (len);
+	return (count);
 }
 
 char	*ft_itoa(int n)
 {
 	long	num;
-	int		len;
-	char	*str;
+	char	*s;
+	size_t	i;
 
+	i = ft_count(n);
 	num = n;
-	len = num_len(num);
-	str = malloc((size_t)len + 1);
-	if (!str)
+	s = malloc(i + 1);
+	if (!s)
 		return (NULL);
-	str[len] = '\0';
+	s[i] = '\0';
 	if (num < 0)
-		num = -num;
-	while (len > 0)
 	{
-		str[--len] = (char)(num % 10 + '0');
+		s[0] = '-';
+		num *= -1;
+	}
+	if (num == 0)
+		s[0] = '0';
+	while (num != 0)
+	{
+		--i;
+		s[i] = (num % 10) + '0';
 		num /= 10;
 	}
-	if (n < 0)
-		str[0] = '-';
-	return (str);
+	return (s);
 }
+/*
+int     main()
+{
+        char *s3=ft_itoa(5);
+        printf("%s",s3);
+        free(s3);
+}
+*/

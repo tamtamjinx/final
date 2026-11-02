@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tlafi <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: rualmasr <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/10/26 19:27:03 by tlafi             #+#    #+#             */
-/*   Updated: 2026/10/26 19:27:04 by tlafi            ###   ########.fr       */
+/*   Created: 2026/09/30 11:21:34 by rualmasr          #+#    #+#             */
+/*   Updated: 2026/09/30 11:23:02 by rualmasr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,20 @@
 
 size_t	ft_strlen(const char *s)
 {
-	size_t	len;
+	size_t	i;
 
-	len = 0;
-	while (s[len])
-		len++;
-	return (len);
+	i = 0;
+	while (s[i] != '\0')
+	{
+		i++;
+	}
+	return (i);
 }
+/*
+int main()
+{
+	printf("%zu\n",strlen("hello"));
+	printf("%zu\n",strlen(""));
+	printf("%zu\n",strlen("22"));
+	printf("%zu\n",strlen("hello world"));
+}*/
